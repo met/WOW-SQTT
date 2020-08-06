@@ -1,0 +1,21 @@
+## Interface: 11305
+## Title: SQTT
+## Notes: Simple Quest Text Tracker Addon
+## Author: Martin Hassman
+## Version: 0.1
+## OptionalDeps: WoWUnit, Errlogger
+## SavedVariables: SQTTSharedData
+## SavedVariablesPerCharacter: SQTTSettings, SQTTData
+
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+consts.lua
+core.lua
+events.lua
+slashcommands.lua
+hooks.lua
+broker.lua
+logger.lua
+questtrack.lua
