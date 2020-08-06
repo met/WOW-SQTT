@@ -1,0 +1,80 @@
+# Lua idioms
+
+Most of them are described in book Roberto Ierusalimschy: Programming in Lua, 4th edition.
+
+
+## 1. Default value for x
+
+x = x or value
+
+
+## 2. Ternary operator
+
+a and b or c
+
+
+## 3. Sequence of codes from string
+
+{ string.byte(s, 1, -1) }
+
+
+## 4. Adding new item to the sequence
+
+a[#a+1] = value
+
+
+## 5. Assert used with IO calls
+
+f = assert(io.open(filename, mode))
+
+
+## 6. Local variable initialized by global variable with same name
+
+local a = a
+
+
+## Others
+
+### Initialization for more variables at once
+
+local a,b = 1,2
+
+
+### Local recursive functions
+
+local f = function() f() end -- WRONG
+
+local f; f = function() f() end -- GOOD
+local function f() f() end -- GOOD, same like above, just syntactic sugar
+
+
+### Function calls with one argument, that is string or table
+
+print "a"
+type{}
+foo{a=1, b=2}
+
+
+### Values exchange
+
+a,b = b,a
+
+
+### List growing
+
+list = nil
+list = { value = "something1", next = list } 
+
+
+### Arguments <=> table
+
+table1 = {...}
+print(unpack(table1))
+
+
+### Return that is not last function command must be inside block
+
+function f()
+  do return end
+  <do something>
+end
