@@ -39,3 +39,9 @@ C.Copper = "\124cFFbd821a";
 
 NS.msgPrefix = C.Yellow.."["..addonName.."] "..C.White;
 
+NS.TTYPES = {}
+local TTYPES = NS.TTYPES;
+TTYPES.QUEST_DETAIL    = "quest detail";
+TTYPES.QUEST_COMPLETE  = "quest complete";
+TTYPES.QUEST_ACCEPTED  = "quest accepted";
+TTYPES.QUEST_TURNED_IN = "quest turned in";

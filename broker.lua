@@ -24,3 +24,55 @@ SOFTWARE.
 
 local addonName, NS = ...;
 local C = NS.C;
+local TTYPES = NS.TTYPES;
+
+local dataBroker;
+
+if LibStub == nil then
+	print(addonName, "ERROR: LibStub not found.");
+	return;
+end
+
+local ldb = LibStub:GetLibrary("LibDataBroker-1.1", true);
+if ldb == nil then
+	print(addonName, "ERROR: LibDataBroker not found.");
+	return;
+end
+
+-- LibDataBroker documentation: https://github.com/tekkub/libdatabroker-1-1/wiki/How-to-provide-a-dataobject
+
+dataBroker = ldb:NewDataObject(addonName, {
+	type = "data source",
+	text = "",
+	icon = "Interface\\Icons\\INV_Misc_Book_03",
+});
+
+
+function dataBroker:OnTooltipShow()
+	self:AddLine(addonName.." v"..GetAddOnMetadata(addonName, "version"));
+	self:AddLine(" ");
+
+	local line, lastLine = "", "";
+
+	for i, item in ipairs(NS.data) do
+		if item.type == TTYPES.QUEST_DETAIL then
+			line = C.White.."Detail: "..C.Yellow..item.quest.title.." at "..C.White..item.npc.name;
+		elseif item.type == TTYPES.QUEST_COMPLETE then
+			line = C.White.."Complete "..C.Yellow..item.quest.title..C.White.." at "..item.npc.name;
+		elseif item.type == TTYPES.QUEST_ACCEPTED then
+			line = C.Yellow.."["..tostring(item.quest[8]).."] "..item.quest[1];
+		elseif item.type == TTYPES.QUEST_TURNED_IN then
+			line = "["..tostring(item.quest.id).."] turned in";
+		else
+			-- should not happen
+			NS.logError("dataBroker:OnTooltipShow found unexpected item.type=", item.type);
+			line = "";
+		end
+
+		-- Prevent printing duplicities (there are in log sometimes, we can fix them too)
+		if line ~= "" and line ~= lastLine then
+			self:AddLine(line);
+			lastLine = line;
+		end
+	end
+end

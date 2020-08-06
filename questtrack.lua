@@ -24,6 +24,7 @@ SOFTWARE.
 
 local addonName, NS = ...;
 local C = NS.C;
+local TTYPES = NS.TTYPES;
 
 
 -- return information about player location
@@ -107,7 +108,7 @@ function NS.trackQuestDetail(log, npc, questInfo)
 	assert(npc, "trackQuestDetail - npc is nil");
 	assert(questInfo, "trackQuestDetail - questInfo is nil");
 
-	NS.writeTrackMessage(log, { type = "quest detail", npc = npc, quest = questInfo });
+	NS.writeTrackMessage(log, { type = TTYPES.QUEST_DETAIL, npc = npc, quest = questInfo });
 end
 
 function NS.trackQuestComplete(log, npc, questInfo)
@@ -115,21 +116,21 @@ function NS.trackQuestComplete(log, npc, questInfo)
 	assert(npc, "trackQuestComplete - npc is nil");
 	assert(questInfo, "trackQuestComplete - questInfo is nil");
 
-	NS.writeTrackMessage(log, { type = "quest complete", npc = npc, quest = questInfo });
+	NS.writeTrackMessage(log, { type = TTYPES.QUEST_COMPLETE, npc = npc, quest = questInfo });
 end
 
 function NS.trackQuestAccepted(log, questInfo)
 	assert(log, "trackQuestAccepted - log is nil");
 	assert(questInfo, "trackQuestAccepted - questInfo is nil");
 
-	NS.writeTrackMessage(log, { type = "quest accepted", quest = questInfo });
+	NS.writeTrackMessage(log, { type = TTYPES.QUEST_ACCEPTED, quest = questInfo });
 end
 
 function NS.trackQuestTurnedIn(log, questInfo)
 	assert(log, "trackQuestTurnedIn - log is nil");
 	assert(questInfo, "trackQuestTurnedIn - questInfo is nil");
 
-	NS.writeTrackMessage(log, { type = "quest turned in", quest = questInfo });
+	NS.writeTrackMessage(log, { type = TTYPES.QUEST_TURNED_IN, quest = questInfo });
 end
 
 -- General call for storing track messages
