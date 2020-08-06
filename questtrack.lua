@@ -85,21 +85,51 @@ function NS.getQuestDetailInfo()
 end
 
 
+-- get info about quest that player is just ready to getQuestComplete
+-- into is from opeened NPC window, where player can just press "Complete quest" button
+function NS.getQuestCompleteInfo()
+	local quest = {};
+	quest.title = GetTitleText();
+
+	if quest.title == nil or quest.title == "" then
+		logDebug("getQuestCompleteInfo() - no quest information found");
+		return nil;
+	end
+
+	quest.rewardText = GetRewardText();
+
+	return quest;
+end
+
 -- Track quest detail info to log
 function NS.trackQuestDetail(log, npc, questInfo)
 	assert(log, "trackQuestDetail - log is nil");
 	assert(npc, "trackQuestDetail - npc is nil");
 	assert(questInfo, "trackQuestDetail - questInfo is nil");
 
-	NS.writeTrackMessage(log, {type = "quest detail", npc = npc, quest = questInfo});
+	NS.writeTrackMessage(log, { type = "quest detail", npc = npc, quest = questInfo });
 end
 
+function NS.trackQuestComplete(log, npc, questInfo)
+	assert(log, "trackQuestComplete - log is nil");
+	assert(npc, "trackQuestComplete - npc is nil");
+	assert(questInfo, "trackQuestComplete - questInfo is nil");
+
+	NS.writeTrackMessage(log, { type = "quest complete", npc = npc, quest = questInfo });
+end
 
 function NS.trackQuestAccepted(log, questInfo)
 	assert(log, "trackQuestAccepted - log is nil");
 	assert(questInfo, "trackQuestAccepted - questInfo is nil");
 
-	NS.writeTrackMessage(log, {type = "quest accepted", quest = questInfo});
+	NS.writeTrackMessage(log, { type = "quest accepted", quest = questInfo });
+end
+
+function NS.trackQuestTurnedIn(log, questInfo)
+	assert(log, "trackQuestTurnedIn - log is nil");
+	assert(questInfo, "trackQuestTurnedIn - questInfo is nil");
+
+	NS.writeTrackMessage(log, { type = "quest turned in", quest = questInfo });
 end
 
 -- General call for storing track messages

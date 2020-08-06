@@ -27,13 +27,15 @@ local addonName, NS = ...;
 NS.C = {};
 local C = NS.C;
 
-C.Yellow = "\124cFFFFFF00";
+-- Color codes: \124cXXRRGGBB
 C.White = "\124cFFFFFFFF";
+C.Yellow = "\124cFFFFFF00";
 C.Red = "\124cFFFF0000";
 C.Blue =  "\124cFF0000FF";
 C.Blue1 = "\124cFF6896FF";
 C.LightBlue = "\124cFFadd8e6";
 C.Green1 = "\124cFF38FFBE";
+C.Copper = "\124cFFbd821a";
 
 NS.msgPrefix = C.Yellow.."["..addonName.."] "..C.White;
 
