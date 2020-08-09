@@ -52,17 +52,25 @@ function dataBroker:OnTooltipShow()
 	self:AddLine(addonName.." v"..GetAddOnMetadata(addonName, "version"));
 	self:AddLine(" ");
 
+	local verbose = IsShiftKeyDown();
+
 	local line, lastLine = "", "";
 
 	for i, item in ipairs(NS.data) do
+		line = "";
+		
 		if item.type == TTYPES.QUEST_DETAIL then
 			line = C.White.."Detail: "..C.Yellow..item.quest.title.." at "..C.White..item.npc.name;
 		elseif item.type == TTYPES.QUEST_COMPLETE then
 			line = C.White.."Complete "..C.Yellow..item.quest.title..C.White.." at "..item.npc.name;
 		elseif item.type == TTYPES.QUEST_ACCEPTED then
-			line = C.Yellow.."["..tostring(item.quest[8]).."] "..item.quest[1];
+			if verbose then
+				line = C.Yellow.."["..tostring(item.quest[8]).."] "..item.quest[1];
+			end
 		elseif item.type == TTYPES.QUEST_TURNED_IN then
-			line = "["..tostring(item.quest.id).."] turned in";
+			if verbose then
+				line = "["..tostring(item.quest.id).."] turned in";
+			end
 		else
 			-- should not happen
 			NS.logError("dataBroker:OnTooltipShow found unexpected item.type=", item.type);
