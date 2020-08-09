@@ -60,9 +60,9 @@ function dataBroker:OnTooltipShow()
 		line = "";
 		
 		if item.type == TTYPES.QUEST_DETAIL then
-			line = C.White.."Detail: "..C.Yellow..item.quest.title.." at "..C.White..item.npc.name;
+			line = C.White.."Detail: "..C.Yellow..item.quest.title.." at "..C.White..(item.npc.name and item.npc.name or ""); -- lua idiom for (a?b:c) some quest has no npc!
 		elseif item.type == TTYPES.QUEST_COMPLETE then
-			line = C.White.."Complete "..C.Yellow..item.quest.title..C.White.." at "..item.npc.name;
+			line = C.White.."Complete "..C.Yellow..item.quest.title..C.White.." at "..(item.npc.name and item.npc.name or "");
 		elseif item.type == TTYPES.QUEST_ACCEPTED then
 			if verbose then
 				line = C.Yellow.."["..tostring(item.quest[8]).."] "..item.quest[1];
