@@ -56,7 +56,18 @@ function dataBroker:OnTooltipShow()
 
 	local line, lastLine = "", "";
 
-	for i, item in ipairs(NS.data) do
+
+
+	local start = 0;
+
+	if #NS.data > 20 then   	-- Show only last 20 items if there are more
+		start = #NS.data - 20; 
+	end 
+
+	--for i, item in ipairs(NS.data) do
+	for i = start, #NS.data do
+		local item = NS.data[i];
+
 		line = "";
 		
 		if item.type == TTYPES.QUEST_DETAIL then
