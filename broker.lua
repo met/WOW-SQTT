@@ -58,7 +58,7 @@ function dataBroker:OnTooltipShow()
 
 
 
-	local start = 0;
+	local start = 1;
 
 	if #NS.data > 20 then   	-- Show only last 20 items if there are more
 		start = #NS.data - 20; 
